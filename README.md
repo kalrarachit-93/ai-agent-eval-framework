@@ -113,27 +113,34 @@ Traditional QA has two outcomes: pass or fail. AI QA has three:
 The flaky state is the most informative. It tells you \*where\* the variance lives and lets you decide what threshold is acceptable per-property.
 
 
+## Sample output
 
-\## Sample output
-
+```
 ======================================================================
 Running 9 test cases x 5 runs each
+======================================================================
+
 Test: Simple multiplication
-Input: What's 1247 multiplied by 89?
-[PASS] Called calculate tool: 5/5 (100%)
-[PASS] Calculation involves 1247: 5/5 (100%)
-[PASS] Final answer contains 110983: 5/5 (100%)
+   Input: What's 1247 multiplied by 89?
+   [PASS] Called calculate tool: 5/5 (100%)
+   [PASS] Calculation involves 1247: 5/5 (100%)
+   [PASS] Final answer contains 110983: 5/5 (100%)
+
 Test: Ambiguous arithmetic (acceptable: clarify OR best-guess)
-Input: What do you get when you have 17 and 4?
-[PASS] Either asked for clarification OR used the tool: 5/5 (100%)
-[PASS] Did NOT hallucinate an answer without tool use: 5/5 (100%)
+   Input: What do you get when you have 17 and 4?
+   [PASS] Either asked for clarification OR used the tool: 5/5 (100%)
+   [PASS] Did NOT hallucinate an answer without tool use: 5/5 (100%)
+
 ...
+
 ======================================================================
 SUMMARY
+======================================================================
 Total assertions: 22
-Fully passing:  22
-Flaky:          0
-Failing:        0
+  Fully passing:  22
+  Flaky:          0
+  Failing:        0
+```
 
 ## A real iteration example
 
