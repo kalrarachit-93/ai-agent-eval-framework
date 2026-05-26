@@ -145,7 +145,7 @@ The bug was in the test, not the agent. The refined test now accepts either vali
 
 ```bash
 # Clone
-git clone https://github.com/[your-username]/ai-agent-eval-framework
+git clone https://github.com/kalrarachit-93/ai-agent-eval-framework
 cd ai-agent-eval-framework
 
 # Install
