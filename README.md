@@ -112,6 +112,36 @@ Traditional QA has two outcomes: pass or fail. AI QA has three:
 
 The flaky state is the most informative. It tells you \*where\* the variance lives and lets you decide what threshold is acceptable per-property.
 
+## LLM-as-judge evaluators
+
+Property checks can't assess everything. Tone, clarity, factual correctness, and
+audience-appropriateness require judgment, not string matching. For these, the
+framework includes an LLM-as-judge evaluator: a separate Claude call grades the
+agent's response against a structured rubric and returns PASS or FAIL.
+
+Design choices:
+- The judge defaults to a smaller, cheaper model (Haiku), separate from the
+  agent's model, to reduce self-grading bias and cost.
+- Rubrics use explicit fail conditions ("If X, FAIL") for reliable verdicts.
+- A strict output format ("VERDICT: PASS or FAIL") makes parsing deterministic.
+
+Example judge-based test cases: detecting jargon in beginner explanations,
+checking for condescending tone, and verifying factual accuracy.
+
+## Validating the judges (meta-evaluation)
+
+An LLM judge is itself a non-deterministic system, so it has to be validated too.
+The framework does this two ways:
+
+1. **Direct judge validation.** Known-good and known-bad responses are fed
+   straight to the judge as fixtures. The judge must FAIL the bad ones and PASS
+   the good ones — proving it discriminates rather than rubber-stamping.
+
+2. **Alignment tests.** The agent is asked to produce rude or factually wrong
+   output. In practice Claude refuses, which surfaced an important lesson: you
+   can't reliably validate a judge by asking a well-aligned agent to misbehave.
+   This is why the direct fixture-based validation above exists — it's the same
+   approach production eval teams use.
 
 ## Sample output
 
